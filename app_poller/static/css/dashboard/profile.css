@@ -1,0 +1,26 @@
+.sidebar, .collapse{
+    background-color: #191B20;
+  }
+
+  #text {
+  color: rgb(255, 255, 255, 1);
+  font-family: 'Poiret One', cursive;
+  font-size: 28px;
+  font-weight: 400;
+  text-shadow: 0 0 80px #ffffff;
+  text-transform: lowercase;
+}
+.collapse-item {
+  color: #ffffff !important;
+}
+.collapse-item:hover {
+  background-color: #191B30 !important;
+}
+.dropdown-header {
+  background-color: #191B20 !important;
+  border: 1px solid #191B20 !important;
+}
+
+.text {
+    font-size: 18px !important;
+}

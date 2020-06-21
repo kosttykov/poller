@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>poller</title>
+
+    <!--FONTS-->
+    <link href="https://fonts.googleapis.com/css2?family=Poiret+One&family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
+    <!--BOOTSTRAP-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+            integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous">
+    </script>
+
+    {% load static %}
+    <!--STATIC-->
+    <link rel="stylesheet" href="{% static "css/signup.css" %}">
+    <link rel="shortcut icon" href="{% static "img/ico/favicon.ico" %}">
+    <script defer src="{% static "js/valid.js" %}"></script>
+
+
+</head>
+<body>
+    <div class="main">
+  <div class="wrapper">
+
+  <div class="header">
+    <p id="headerText">Create account</p>
+  </div>
+
+  <div class="container login">
+    <form method="post">
+      {% csrf_token %}
+        <div class="form-group">
+          <label class="text" for="id_username">Username</label>
+          <input type="text" class="form-control" name="username" maxlength="150" autofocus="" required="" id="id_username">
+        </div>
+
+        <div class="form-group">
+          <label class="text" for="id_email">Email</label>
+          <input type="email" class="form-control" name="email" maxlength="254" required="" id="id_email">
+        </div>
+
+        <div class="form-group">
+          <label class="text" for="id_password1">Password</label>
+          <input type="password" class="form-control" name="password1" autocomplete="new-password" required="" id="id_password1" minlength="8" aria-autocomplete="list">
+        </div>
+
+        <div class="form-group">
+          <label class="text" for="id_password2">Repeat password</label>
+          <input type="password" class="form-control" name="password2" autocomplete="new-password" required="" id="id_password2" aria-autocomplete="list">
+        </div>
+
+        <button type="submit" class="btn text" id="login-button">Sign up</button>
+    </form>
+  </div>
+
+  </div>
+</div>
+</body>
+</html>
