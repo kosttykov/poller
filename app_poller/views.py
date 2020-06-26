@@ -8,6 +8,7 @@ from django.urls import reverse_lazy
 from django.views.generic import FormView
 from django.contrib.auth.forms import UserCreationForm
 from app_poller.forms import SignUpForm
+from app_poller.models import Question
 from django.contrib.auth import login, authenticate
 
 # Create your views here.
@@ -34,8 +35,27 @@ def dashboard_profile(request):
         context['id'] = request.user.id
         context['date_joined'] = request.user.date_joined
         context['email'] = request.user.email
-        context['last_login'] = request.user.last_login
         return render(request, 'dashboard/profile.html', context)
+    else:
+        return HttpResponseRedirect(reverse_lazy('app_poller:home'))
+
+def dashboard_questions(request):
+    context = {}
+    if request.user.is_authenticated:
+        context['username'] = request.user.username
+        questions = Question.objects.all()
+        context['questions'] = questions
+        return render(request, 'dashboard/questions.html', context)
+    else:
+        return HttpResponseRedirect(reverse_lazy('app_poller:home'))
+
+def dashboard_questions_create(request):
+    context = {}
+    if request.user.is_authenticated:
+        context['username'] = request.user.username
+        questions = Question.objects.all()
+        context['questions'] = questions
+        return render(request, 'dashboard/questions_create.html', context)
     else:
         return HttpResponseRedirect(reverse_lazy('app_poller:home'))
 
