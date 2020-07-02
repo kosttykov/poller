@@ -32,30 +32,21 @@ sudo docker-compose build
 ```
 
 ```
-sudo docker-compose up
+sudo docker-compose up -d
 ```
-
-Quit the server
-
 
 Run:
 
 ```
-docker-compose run web python manage.py migrate --noinput
+sudo docker-compose exec web python manage.py migrate --noinput
 ```
 
 ```
-docker-compose run web python manage.py collectstatic --no-input --clear
-```
-
-Then you can run conatiners in daemon mode:
-
-```
-docker-compose up -d
+sudo docker-compose exec web python manage.py collectstatic --no-input --clear
 ```
 
 Also you can create superuser:
 
 ```
-docker-compose run web python manage.py createsuperuser
+sudo docker-compose exec web python manage.py createsuperuser
 ```
