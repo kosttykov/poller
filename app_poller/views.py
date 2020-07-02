@@ -1,15 +1,18 @@
-from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from django.template import loader
-from django.contrib.auth.forms import AuthenticationForm
-from django.contrib import auth
 from django.http.response import HttpResponseRedirect
+
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib import auth
+from django.contrib.auth import login, authenticate
+
 from django.urls import reverse_lazy
 from django.views.generic import FormView
-from django.contrib.auth.forms import UserCreationForm
+from django.template import loader, RequestContext
+from django.shortcuts import render, redirect
+
 from app_poller.forms import SignUpForm
 from app_poller.models import Question
-from django.contrib.auth import login, authenticate
+
 
 # Create your views here.
 
@@ -51,7 +54,13 @@ def dashboard_questions(request):
 
 def dashboard_questions_create(request):
     context = {}
-    if request.user.is_authenticated:
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            form.owned = request.user.username
+            form.save()
+        return HttpResponseRedirect(reverse_lazy('app_poller:dashboard_questions'))
+    elif request.user.is_authenticated:
         context['username'] = request.user.username
         questions = Question.objects.all()
         context['questions'] = questions
@@ -98,3 +107,15 @@ def reset_password(request):
 def logout(request):  
     auth.logout(request)  
     return HttpResponseRedirect(reverse_lazy('app_poller:home'))
+
+def handler404(request, *args, **argv):
+    response = render_to_response('404.html', {},
+                                  context_instance=RequestContext(request))
+    response.status_code = 404
+    return response
+
+def handler500(request, *args, **argv):
+    response = render_to_response('500.html', {},
+                                  context_instance=RequestContext(request))
+    response.status_code = 500
+    return response

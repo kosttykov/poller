@@ -14,3 +14,6 @@ urlpatterns = [
     path('dashboard/questions', views.dashboard_questions, name='dashboard_questions'),
     path('dashboard/questions/create', views.dashboard_questions_create, name='dashboard_questions_creaete'),
 ]
+
+handler404 = 'app_poller.views.handler404'
+handler500 = 'app_poller.views.handler500'

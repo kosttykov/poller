@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:12.3
+    environment:
+      - POSTGRES_DB=poller
+      - POSTGRES_USER=poller
+      - POSTGRES_PASSWORD=poller
+    hostname: 
+      db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/code
+      - static_volume:/code/static
+    expose:
+      - 8000
+    depends_on:
+      - db
+  nginx:
+    build: ./nginx
+    volumes:
+      - static_volume:/code/static
+    ports:
+      - 1337:80
+    depends_on:
+      - web
+
+volumes:
+  postgres_data:
+  static_volume:
