@@ -1,0 +1,45 @@
+{% extends 'dashboard.html' %}
+{% block content %}
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Edit question</h1>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card shadow mb-4">
+            <div class="row align-items-center justify-content-center">
+                <div class="col-7 mb-3 mt-3">
+                    <form method="post">
+                        {% csrf_token %}
+                        
+                            <div class="form-group">
+                                <label class="text" for="id_title">Question</label>
+                                <input type="text" class="form-control col-11" value="{{ questions.title }}" name="title" autofocus="" maxlength="120" required id="id_title">
+                            </div>
+
+                            <div class="form-group">
+                                <label class="text" for="id_question">Answer options</label>
+                                {% for question in questions.body.option %}
+                                <div class="input-group">
+                                    <input type="textarea" class="form-control mb-2" name="option" id="id_question" placeholder="{% cycle '1 option' '2 option' '3 option' '4 option' '5 option' '6 option' '7 option' '8 option' '9 option' '10 option' as num %}" value="{{ question }}" {% if num == "1 option" or num == "2 option" %}required{% endif %}>
+                                    <input type="checkbox" name="right" title="Is this option right?" class="form-control col-1 ml-2 checkbox" value="{% cycle '0' '1' '2' '3' '4' '5' '6' '7' '8' '9' as val %}"  {% if val in questions.body.right_answer %}checked{% endif %}>
+                                </div>
+                                {% endfor %}
+                            </div>
+
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="text" for="">May choose several:</span>
+                                    <input type="checkbox" name="is_several" value="True" class="form-control col-1 ml-2" style="height: 20px;" {% if questions.body.is_several == "True" %}checked{% endif %}>
+                                </div>
+                            </div>
+                        
+                            <button type="submit" class="btn text btn-outline-dark" id="login-button">Update</button>
+                        
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -5,26 +5,75 @@
 </div>
 
 <div class="row">
-    <div class="col-xl-12 col-lg-7">
+    <div class="col-12">
         <div class="card shadow mb-4">
+            <div class="row align-items-center justify-content-center">
+                <div class="col-7 mb-3 mt-3">
+                    <form method="post">
+                        {% csrf_token %}
+                        
+                            <div class="form-group">
+                                <label class="text" for="id_title">Question</label>
+                                <input type="text" class="form-control col-11" name="title" autofocus="" maxlength="120" required id="id_title">
+                            </div>
 
-            <form method="post">
-                {% csrf_token %}
-                <div class="col-sm-5 mb-3 mt-3">
-                <div class="form-group">
-                    <label class="text" for="id_title">Question</label>
-                    <input type="text" class="form-control"name="username" autofocus="" autocapitalize="none" autocomplete="username" maxlength="120" required="" id="id_title">
-                </div>
+                            <div class="form-group">
+                                <label class="text" for="id_question">Answer options</label>
 
-                <div class="form-group add-inp">
-                    <label class="text" for="id_question">Answer options</label>
-                    <input type="textarea" class="form-control mb-2"name="username" autofocus="" autocapitalize="none" autocomplete="username" required="" id="id_question">
-                    <input type="textarea" class="form-control mb-2"name="username" autofocus="" autocapitalize="none" autocomplete="username" required="" id="id_question">
+                                <div class="input-group">
+                                    <input type="textarea" class="form-control mb-2" name="option" required id="id_question" placeholder="1 option">
+                                    <input type="checkbox" name="right" value="0" title="Is this option right?" class="form-control col-1 ml-2 checkbox">
+                                </div>
+                                <div class="input-group">
+                                    <input type="textarea" class="form-control mb-2" name="option" required id="id_question" placeholder="2 option">
+                                    <input type="checkbox" name="right" value="1" title="Is this option right?" class="form-control col-1 ml-2">
+                                </div>
+                                <div class="input-group">
+                                    <input type="textarea" class="form-control mb-2" name="option" id="id_question" placeholder="3 option">
+                                    <input type="checkbox" name="right" value="2" title="Is this option right?" class="form-control col-1 ml-2">
+                                </div>
+                                <div class="input-group">
+                                    <input type="textarea" class="form-control mb-2" name="option" id="id_question" placeholder="4 option">
+                                    <input type="checkbox" name="right" value="3" title="Is this option right?" class="form-control col-1 ml-2">
+                                </div>
+                                <div class="input-group">
+                                    <input type="textarea" class="form-control mb-2" name="option" id="id_question" placeholder="5 option">
+                                    <input type="checkbox" name="right" value="4" title="Is this option right?" class="form-control col-1 ml-2">
+                                </div>
+                                <div class="input-group">
+                                    <input type="textarea" class="form-control mb-2" name="option" id="id_question" placeholder="6 option">
+                                    <input type="checkbox" name="right" value="5" title="Is this option right?" class="form-control col-1 ml-2">
+                                </div>
+                                <div class="input-group">
+                                    <input type="textarea" class="form-control mb-2" name="option" id="id_question" placeholder="7 option">
+                                    <input type="checkbox" name="right" value="6" title="Is this option right?" class="form-control col-1 ml-2">
+                                </div>
+                                <div class="input-group">
+                                    <input type="textarea" class="form-control mb-2" name="option" id="id_question" placeholder="8 option">
+                                    <input type="checkbox" name="right" value="7" title="Is this option right?" class="form-control col-1 ml-2">
+                                </div>
+                                <div class="input-group">
+                                    <input type="textarea" class="form-control mb-2" name="option" id="id_question" placeholder="9 option">
+                                    <input type="checkbox" name="right" value="8" title="Is this option right?" class="form-control col-1 ml-2">
+                                </div>
+                                <div class="input-group">
+                                    <input type="textarea" class="form-control mb-2" name="option" id="id_question" placeholder="10 option">
+                                    <input type="checkbox" name="right" value="9" title="Is this option right?" class="form-control col-1 ml-2">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="text" for="">May choose several:</span>
+                                    <input type="checkbox" name="is_several" value="True" class="form-control col-1 ml-2" style="height: 20px;">
+                                </div>
+                            </div>
+                        
+                            <button type="submit" class="btn text btn-outline-dark" id="login-button">Create</button>
+                        
+                    </form>
                 </div>
-                <button type="submit" class="btn text btn-outline-dark" id="login-button">Create</button>
-                <button class="add_form_field col-sm-3 btn btn-outline-dark">Add New Field</button>
             </div>
-            </form>
         </div>
     </div>
 </div>
