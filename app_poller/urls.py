@@ -15,6 +15,8 @@ urlpatterns = [
     path('dashboard/questions/create', views.dashboard_questions_create, name='dashboard_questions_creaete'),
     path('dashboard/questions/delete/<int:id>/', views.dashboard_questions_delete, name='dashboard_questions_delete'),
     path('dashboard/questions/edit/<int:id>/', views.dashboard_questions_edit, name='dashboard_questions_edit'),
+    path('dashboard/polls', views.dashboard_polls, name='dashboard_polls'),
+    path('dashboard/polls/create', views.dashboard_polls_create, name='dashboard_polls_create'),
 ]
 
 handler404 = 'app_poller.views.handler404'

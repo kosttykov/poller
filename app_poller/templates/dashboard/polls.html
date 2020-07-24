@@ -1,0 +1,41 @@
+{% extends 'dashboard.html' %}
+{% block content %}
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Polls</h1>
+    <a class="btn btn-outline-dark" href="/dashboard/polls/create" role="button">Create poll</a>
+</div>
+
+<div class="row">
+{% for poll in polls %}
+<div class="card shadow col-sm-4 mb-4">
+
+    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+      <h6 class="m-0 font-weight-bold text-dark">{{ poll.title }}</h6>
+      
+      <div class="dropdown no-arrow show">
+        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+          <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink" x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(-156px, 19px, 0px);">
+          <a class="dropdown-item" href="">Edit</a>
+          <a class="dropdown-item bg-danger text-white" href="">Delete</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-body">
+      <ul>
+        {% for title in poll.questions.all %}
+        <li>{{ title }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    <hr class="mb-0">
+    <div class="card-header bg-white m-0 d-flex flex-row align-items-center justify-content-between">
+        <h6 class="m-0 text-secondary">Owner: </h6>
+        <h6 class="m-0 text-secondary"> Id: {{ poll.id }}</h6>
+    </div>
+{% endfor %}
+
+</div>
+{% endblock %}

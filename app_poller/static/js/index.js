@@ -71,7 +71,7 @@ var TextScramble = function () {
   return TextScramble;
 }();
 
-var phrases = ["Convinient manage", "Flexible setting", "Absolutely free", "Join now!","It's poller...", "Create polls"];
+var phrases = ["Convinient manage", "Flexible setting", "Absolutely free", "Join now!", "It's poller...", "Create polls"];
 
 var el = document.querySelector('#anitext');
 var fx = new TextScramble(el);
