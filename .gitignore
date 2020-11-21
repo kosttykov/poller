@@ -2,6 +2,8 @@
 /.vscode/**
 /media/**
 /static/**
-/app_poller/migrations/**
 /app_poller/__pycache__/**
 /poller/__pycache__/**
+**/migrations/**
+!**/migrations
+!**/migrations/__init__.py
