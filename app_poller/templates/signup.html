@@ -42,22 +42,24 @@
       {% csrf_token %}
         <div class="form-group">
           <label class="text" for="id_username">Username</label>
-          <input type="text" class="form-control" name="username" maxlength="150" autofocus="" required="" id="id_username">
+          <input type="text" class="form-control inputs" name="username" maxlength="150" autofocus required id="id_username">
+          {% if messages %} {% for message in messages %} <p class="text">{{ message}}</p> {% endfor %} {% endif %}
         </div>
 
         <div class="form-group">
           <label class="text" for="id_email">Email</label>
-          <input type="email" class="form-control" name="email" maxlength="254" required="" id="id_email">
+          <input type="email" class="form-control inputs" name="email" maxlength="254" required id="id_email">
         </div>
 
         <div class="form-group">
           <label class="text" for="id_password1">Password</label>
-          <input type="password" class="form-control" name="password1" autocomplete="new-password" required="" id="id_password1" minlength="8" aria-autocomplete="list">
+          <input type="password" class="form-control inputs" name="password1" autocomplete="new-password" required id="id_password1" aria-autocomplete="list" minlength="4">
         </div>
 
         <div class="form-group">
           <label class="text" for="id_password2">Repeat password</label>
-          <input type="password" class="form-control" name="password2" autocomplete="new-password" required="" id="id_password2" aria-autocomplete="list">
+          <input type="password" class="form-control inputs" name="password2" autocomplete="new-password" required id="id_password2" aria-autocomplete="list">
+          <p class="text font-weight-light mt-1"><small>Min password length: 4</small></p>
         </div>
 
         <button type="submit" class="btn text" id="login-button">Sign up</button>

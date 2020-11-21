@@ -42,12 +42,12 @@
      {% csrf_token %}
       <div class="form-group">
         <label class="text" for="id_username">Username</label>
-        <input type="text" class="form-control"name="username" autofocus="" autocapitalize="none" autocomplete="username" maxlength="150" required="" id="id_username">
+        <input type="text" class="form-control inputs" name="username" autofocus="" autocapitalize="none" autocomplete="off" maxlength="150" required="" id="id_username">
       </div>
       
       <div class="form-group">
-        <label class="text" for="id_password">Password <a href="/reset_password" id="forgotPassword">Forgot password?</a></label>
-        <input type="password" class="form-control" name="password" autocomplete="current-password" required="" id="id_password">
+        <label class="text" for="id_password">Password</label>
+        <input type="password" class="form-control inputs" name="password" autocomplete="off" required="" id="id_password">
       </div>
 
       <button type="submit" class="btn text" id="login-button">Sign in</button>

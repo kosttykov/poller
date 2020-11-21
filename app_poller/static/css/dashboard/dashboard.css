@@ -20,3 +20,37 @@
   background-color: #191B20 !important;
   border: 1px solid #191B20 !important;
 }
+.dashboard_answers_text {
+  font-weight: 800;
+  
+}
+.dashboard_answers_text_right {
+  font-weight: 800;
+  color: #31C95F;
+}
+.dashboard_answers_text_wrong {
+  font-weight: 800;
+  color: #C93131;
+}
+.dashboard_answer_input {
+  pointer-events: none;
+}
+.darken {
+  background-color: #d1d1d1;
+}
+.width-img {
+  width: 20%;
+  transition: transform .3s;
+}
+.width-img:hover {
+  transition-delay: .3s;
+  transform: scale(4); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */  
+  z-index: 1;
+  position: relative;
+}
+.tim{
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto 10px;
+
+}

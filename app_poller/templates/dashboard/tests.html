@@ -1,0 +1,71 @@
+{% extends 'dashboard.html' %}
+{% block content %}
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Polls</h1>
+</div>
+{% now 'Y-m-d' as ti %}
+<div class="row">
+{% for poll in polls %}
+{% if poll.publishing_time|date:'Y-m-d' <= ti %}
+{% if poll.id not in exists_answer and poll.finishing_time|date:'Y-m-d' >= ti %}
+<div class="card col-xl-3 col-lg-4 col-sm-6 mb-1">
+
+    <div class="card-header pt-2 pb-2 d-flex flex-row align-items-center justify-content-between">
+      <h6 class="m-0 font-weight-bold text-dark">{{ poll.title }}</h6>
+      
+      <div class="dropdown no-arrow show">
+        <a class="btn btn-outline-dark" href="/dashboard/tests/take/{{ poll.id }}/" role="button">&#10148;</a>
+      </div>
+    </div>
+
+    <div class="card-body">
+      <ul>
+        {% for title in poll.questions.all %}
+        <li>{{ title }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+</div>
+{% elif poll.id not in exists_answer and poll.finishing_time|date:'Y-m-d' <= ti %}
+<div class="card col-xl-3 col-lg-4 col-sm-6 mb-1 darken">
+
+  <div class="card-header pt-2 pb-2 d-flex flex-row align-items-center justify-content-between darken">
+    <h6 class="mt-2 mb-2 font-weight-bold text-dark">{{ poll.title }}</h6>
+    
+    <div class="dropdown no-arrow show">
+      <a >expired</a>
+    </div>
+  </div>
+
+  <div class="card-body">
+    <ul>
+      {% for title in poll.questions.all %}
+      <li>{{ title }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+{% elif poll.id in exists_answer %}
+<div class="card col-xl-3 col-lg-4 col-sm-6 mb-1 darken">
+
+  <div class="card-header pt-2 pb-2 d-flex flex-row align-items-center justify-content-between darken">
+    <h6 class="mt-2 mb-2 font-weight-bold text-dark">{{ poll.title }}</h6>
+    
+    <div class="dropdown no-arrow show">
+      <a >taken</a>
+    </div>
+  </div>
+
+  <div class="card-body">
+    <ul>
+      {% for title in poll.questions.all %}
+      <li>{{ title }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endif %}
+{% endif %}
+{% endfor %}
+</div>
+{% endblock %}

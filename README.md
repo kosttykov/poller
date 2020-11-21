@@ -1,18 +1,16 @@
 ```
-╋╋╋╋╋╋┏┓┏┓
-╋╋╋╋╋╋┃┃┃┃
-┏━━┳━━┫┃┃┃┏━━┳━┓
-┃┏┓┃┏┓┃┃┃┃┃┃━┫┏┛
-┃┗┛┃┗┛┃┗┫┗┫┃━┫┃
-┃┏━┻━━┻━┻━┻━━┻┛
+╋╋╋╋╋╋╋╋┏┓ ┏┓
+╋╋╋╋╋╋╋╋┃┃ ┃┃
+┏━━┓┏━━┓┃┃ ┃┃ ┏━━┓┏━┓
+┃┏┓┃┃┏┓┃┃┃ ┃┃ ┃┃━┫┃┏┛
+┃┗┛┃┃┗┛┃┃┗┓┃┗┓┃┃━┫┃┃
+┃┏━┛┗━━┛┗━┛┗━┛┗━━┛┗┛
 ┃┃
 ┗┛
 ```
 
-<hr>
-
 <h1>
-Installation:
+Installing Docker:
 </h1>
 
 ```
@@ -20,33 +18,45 @@ sudo apt-get install docker docker-compose
 ```
 
 <h1>
-Launch:
+Building and configuring images:
 </h1>
 
 Go to the project directory
 
-Run:
+<br>
 
+Build images:
 ```
 sudo docker-compose build
 ```
 
+Run in daemon mode:
 ```
 sudo docker-compose up -d
 ```
+*project will run on 127.0.0.1:1337
 
-Run:
+<br>
 
+Make migrations:
 ```
-sudo docker-compose exec web python manage.py migrate --noinput
+sudo docker-compose exec web python manage.py makemigrations app_poller
+```
+```
+sudo docker-compose exec web python manage.py migrate 
 ```
 
+Collect static:
 ```
-sudo docker-compose exec web python manage.py collectstatic --no-input --clear
+sudo docker-compose exec web python manage.py collectstatic --clear
 ```
 
-Also you can create superuser:
+Restart containers:
+```
+sudo docker-compose restart
+```
 
+Also you need to create a superuser:
 ```
 sudo docker-compose exec web python manage.py createsuperuser
 ```

@@ -1,0 +1,37 @@
+{% extends 'dashboard.html' %}
+{% block content %}
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Answers</h1>
+</div>
+
+<div class="row align-items-center justify-content-center">
+    <div class="col-lg-9 col-md-11 col-sm-12">
+        <div class="card shadow mb-4">
+            <div class="row">
+                <div class="col-12 mb-3 mt-3">
+                    <div class="form-group col-12">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col" class="sortable">Polls</th>
+                                    <th scope="col" class="sortable">Publishing time</th>
+                                    <th scope="col" class="sortable">Finishing time</th>
+                                    <th scope="col" class="sortable">Owned</th>
+                                </tr>
+                            </thead>
+                            {% for poll in polls %}
+                            <tr>
+                                <th scope="col" class="sortable"><a href="/dashboard/answers/{{poll.id}}/">{{ poll.title }}</a></th>
+                                <th scope="col" class="sortable">{{ poll.publishing_time }}</th>
+                                <th scope="col" class="sortable">{{ poll.finishing_time }}</th>
+                                <th scope="col" class="sortable">{{ poll.owned }}</th>
+                            </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

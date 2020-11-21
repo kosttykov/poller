@@ -23,10 +23,12 @@
   border: 1px solid darkgrey;
   border-radius: 3px;
 }
-    input {
+    .inputs {
       width: 278px;
       height: 33px;
       border-radius: 2px;
+      background-color:  #191B20 !important;
+      color: #ffffff !important;
     }
     #forgotPassword {
       margin-left: 100px;

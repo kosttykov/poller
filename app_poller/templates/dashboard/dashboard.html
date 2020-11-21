@@ -4,4 +4,183 @@
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
 </div>
+<div class="container-fluid">
+    <!-- Content Row -->
+    <div class="row">
+
+      <!-- Earnings (Monthly) Card Example -->
+      <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-dark shadow h-100 py-2">
+          <div class="card-body">
+            <div class="row no-gutters align-items-center">
+              <div class="col mr-2">
+                <div class="text-xs font-weight-bold text-dark text-uppercase mb-1">Date</div>
+                <div class="h5 mb-0 font-weight-bold text-gray-800">{% now "jS F" %}</div>
+              </div>
+              <div class="col-auto">
+                <i class="fas fa-calendar fa-2x text-gray-300"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Earnings (Monthly) Card Example -->
+      <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-dark shadow h-100 py-2">
+          <div class="card-body">
+            <div class="row no-gutters align-items-center">
+              <div class="col mr-2">
+                <div class="text-xs font-weight-bold text-dark text-uppercase mb-1">Polls</div>
+                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ dashboard.polls }}</div>
+              </div>
+              <div class="col-auto">
+                <i class="fas fa-clipboard fa-2x text-gray-300"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Earnings (Monthly) Card Example -->
+      <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-dark shadow h-100 py-2">
+          <div class="card-body">
+            <div class="row no-gutters align-items-center">
+              <div class="col mr-2">
+                <div class="text-xs font-weight-bold text-dark text-uppercase mb-1">Questions</div>
+                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{ dashboard.questions }}</div>                  
+              </div>
+              <div class="col-auto">
+                <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pending Requests Card Example -->
+      <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-dark shadow h-100 py-2">
+          <div class="card-body">
+            <div class="row no-gutters align-items-center">
+              <div class="col mr-2">
+                {% if request.user.is_staff %}
+                <div class="text-xs font-weight-bold text-dark text-uppercase mb-1">Answers</div>
+                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ dashboard.answers }}</div>
+                {% else %}
+                <div class="text-xs font-weight-bold text-dark text-uppercase mb-1">Your answers</div>
+                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ dashboard.user_answers }}</div>
+                {% endif %}
+              </div>
+              <div class="col-auto">
+                <i class="fas fa-clipboard-check fa-2x text-gray-300"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Content Row -->
+    <div class="row">
+
+      <!-- Earnings (Monthly) Card Example -->
+      <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-dark shadow h-100 py-2">
+          <div class="card-body">
+            <div class="row no-gutters align-items-center">
+              <div class="col mr-2">
+                <div class="text-xs font-weight-bold text-dark text-uppercase mb-1">Time</div>
+                <div class="h5 mb-0 font-weight-bold text-gray-800">{% load tz %}{% localtime on %}{% now "H:i" %}{% endlocaltime %}</div>
+              </div>
+              <div class="col-auto">
+                <i class="fas fa-clock fa-2x text-gray-300"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Earnings (Monthly) Card Example -->
+      <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-dark shadow h-100 py-2">
+          <div class="card-body">
+            <div class="row no-gutters align-items-center">
+              <div class="col mr-2">
+                <div class="text-xs font-weight-bold text-dark text-uppercase mb-1">Users</div>
+                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ dashboard.users }}</div>
+              </div>
+              <div class="col-auto">
+                <i class="fas fa-users fa-2x text-gray-300"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Earnings (Monthly) Card Example -->
+      <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-dark shadow h-100 py-2">
+          <div class="card-body">
+            <div class="row no-gutters align-items-center">
+              <div class="col mr-2">
+                <div class="text-xs font-weight-bold text-dark text-uppercase mb-1">Your score</div>
+                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{% if request.user.is_staff %}You are manager{% else %}{{ user_correct_answers.your_score }}{% endif %}</div>                  
+              </div>
+              <div class="col-auto">
+                <i class="fas fa-tasks fa-2x text-gray-300"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pending Requests Card Example -->
+      <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-dark shadow h-100 py-2">
+          <div class="card-body">
+            <div class="row no-gutters align-items-center">
+              <div class="col mr-2">
+                <div class="text-xs font-weight-bold text-dark text-uppercase mb-1">Max score</div>
+                <div class="h5 mb-0 font-weight-bold text-gray-800">{% if request.user.is_staff %}You are manager{% else %}{{ user_correct_answers.max_score }}{% endif %}</div>
+              </div>
+              <div class="col-auto">
+                <i class="fas fa-tasks fa-2x text-gray-300"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Content Row -->
+
+    <div class="row">
+
+     
+
+      <div class="card shadow mb-4 col-12">
+        <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-dark">Statistics</h6>
+        </div>
+        <div class="card-body">
+          <h4 class="small font-weight-bold">Correct answers (you) <span class="float-right">{% if request.user.is_staff %}You are manager{% else %}{{ user_correct_answers.percent }}%{% endif %}</span></h4>
+          <div class="progress mb-4">
+            <div class="progress-bar bg-{% if user_correct_answers.percent <= 25 %}danger{% elif user_correct_answers.percent <= 50 %}warning{% else %}success{% endif %}" role="progressbar" style="width: {{ user_correct_answers.percent }}%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+          <h4 class="small font-weight-bold">Correct answers (all users) <span class="float-right">{{ correct_answers }}%</span></h4>
+          <div class="progress mb-4">
+            <div class="progress-bar bg-{% if correct_answers <= 25 %}danger{% elif correct_answers <= 50 %}warning{% else %}success{% endif %}" role="progressbar" style="width: {{ correct_answers }}%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+          <h4 class="small font-weight-bold">Profile setup <span class="float-right">{% if dashboard.profile_setup == 100 %}Complete!{% else %}{{ dashboard.profile_setup }}%{% endif %}</span></h4>
+          <div class="progress">
+            <div class="progress-bar bg-{% if dashboard.profile_setup <= 25 %}danger{% elif dashboard.profile_setup <= 50 %}warning{% else %}success{% endif %}" role="progressbar" style="width: {{ dashboard.profile_setup }}%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  </div>
 {% endblock %}

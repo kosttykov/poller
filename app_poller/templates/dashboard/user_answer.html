@@ -1,0 +1,69 @@
+{% extends 'dashboard.html' %}
+{% block content %}
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">{{answer.poll}}</h1>
+</div>
+
+<div class="row align-items-center justify-content-center">
+    <div class="col-lg-6 col-md-10 col-sm-12">
+        <div class="card shadow mb-4">
+            <div class="row">
+                <div class="col-12 mb-3 mt-3">
+                    <div class="form-group col-12 mt-3">
+                        <p class="ml-2">User: {{ answer.user }}</p>
+                            <hr>
+                        <p class="ml-2">Poll: {{answer.poll}}</p>
+                            <hr>
+                        {% for question in poll.1 %}
+                            <div class="form-group col-12">
+                                <p class="dashboard_answers_text" 
+                                {% for key, value in poll.0.points.items %}
+                                {% if key == question.id|slugify %}
+                                title="Points for right answer: {{ value }}"
+                                {% endif %}
+                                {% endfor %}>{{ question.title }} </p>
+                                
+                                <ul>
+                                    {% for option in question.body.option %}
+                                    <li {% if forloop.counter0 in question.body.right_answer %}
+                                    class="dashboard_answers_text_right"
+                                    {% else %}
+                                    class="dashboard_answers_text"
+                                    {% endif %}>
+
+                                        <input
+                                        name="{{ question.id }}"
+                                        class="dashboard_answer_input"
+                                        {% for item in answer.body %}
+                                            {% if item|first == question.id and item|last == forloop.parentloop.counter0 %}
+                                                checked
+                                            {% endif %}
+                                        {% endfor %}
+                                        
+                                        {% if question.body.is_several == 'True' %}
+                                            type="checkbox"
+                                        {% else %}
+                                            type="radio"
+                                        {% endif %}>
+
+                                        {{ option }}
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                    <h1 class="h3 ml-4  text-gray-800" title="Total points">Total: {{ answer.total_score }}\{{ answer.max_score }}</h1>
+
+                    <div class="form-group col-12 mt-4 mb-0">
+                        <div class="progress" style="height: 20px;">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: {{ answer.percent }}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{ answer.percent }}%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

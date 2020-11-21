@@ -1,22 +1,139 @@
 {% extends 'dashboard.html' %}
 {% block content %}
 <!-- Page Heading -->
-<div class="d-sm-flex align-items-center justify-content-between mb-4">
+<div class="col-7 d-sm-flex align-items-center justify-content-betwen mb-4">
   <h1 class="h3 mb-0 text-gray-800">Profile</h1>
 </div>
 
-<div class="row">
-    <div class="col-xl-12 col-lg-7">
+<div class="row align-items-center justify-content-center">
+    <div class="col-lg-6 col-md-10 col-sm-12">
         <div class="card shadow mb-4">
-            <hr>
-            <p class="ml-4 text">Username: {{ username }}</p>
-            <hr>
-            <p class="ml-4 text">Your id: {{ id }}</p>
-            <hr>
-            <p class="ml-4 text">You registred: {{ date_joined }}</p>
-            <hr>
-            <p class="ml-4 text">Your email: {{ email }}</p>
-            <hr>
+            <div class="row">
+                <div class="col-12 mt-3">
+                    <form method="POST" name="editProfile" action="">
+                    {% csrf_token %}
+                        <div class="form-group col-12">
+                            <label class="text" for="username">Username</label>
+                            <input type="text" class="form-control" name="username" value="{{ request.user.username }}" required id="username" disabled>
+                            <p class="text font-weight-light mt-1 ml-1"><small>You can change <a href="" data-toggle="modal" data-target="#editUsername">username</a> or <a class="" href="" data-toggle="modal" data-target="#editPassword">password</a></small></p>
+                        </div>
+
+                        <div class="form-group col-12">
+                            <label class="text">Email</label>
+                            <input type="text" class="form-control" value="{{ request.user.email }}" disabled>
+                            <p class="text font-weight-light mt-1 ml-1"><small>Also you can change <a href="" data-toggle="modal" data-target="#editEmail">email</a></small></p>
+                        </div>
+
+                        <div class="form-group col-12">
+                            <label class="text" for="first_name">First name</label>
+                            <input type="text" class="form-control" name="first_name" value="{{ request.user.first_name }}" id="first_name">
+                        </div>
+
+                        <div class="form-group col-12">
+                            <label class="text" for="last_name">Last name</label>
+                            <input type="text" class="form-control" name="last_name" value="{{ request.user.last_name }}" id="last_name" >
+                        </div>
+
+                        <button type="submit" class="btn text btn-outline-dark ml-3 mt-2" name="editProfile" value="True">Update name</button>
+
+                        <hr>
+
+                        <div class="form-group col-12">
+                            <p class="text">Date joined: {{ request.user.date_joined }}</p>
+                        </div>
+
+                        <div class="form-group col-12">
+                            <p class="text">Id: {{ request.user.id }}</p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="editUsername" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Change username</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <form method="POST" name="editUsername" action="">
+                {% csrf_token %}
+                    <div class="form-group">
+                        <label class="text" for="id_password1">New username</label>
+                        <input type="text" class="form-control inputs" name="username" autocomplete="off" required id="id_username1">
+                        {% if messages %}{% for message in messages %}<p class="text font-weight-light mt-1 ml-1">{{ message }}</p>{% endfor %}{% endif %}
+                    </div>
+                    <button type="submit" class="btn text btn-outline-dark" name="editUsername" value="True">Change username</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="editPassword" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Change password</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <form method="POST" name="editPassword" action="">
+                {% csrf_token %}
+                    <div class="form-group">
+                        <label class="text" for="id_password1">New password</label>
+                        <input type="password" minlength="4" class="form-control inputs" name="password" autocomplete="new-password" required id="id_password1" minlength="8" aria-autocomplete="list">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="text" for="id_password2">Repeat password</label>
+                        <input type="password" minlength="4" class="form-control inputs" name="password" autocomplete="new-password" required id="id_password2" minlength="8" aria-autocomplete="list">
+                    </div>
+                    <p class="text font-weight-light mt-1 ml-1"><small>Min lenght: 4</small></p>
+                    <button type="submit" class="btn text btn-outline-dark" name="editPassword" value="True">Change password</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="editEmail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Change email</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <form method="POST" name="editEmail" action="">
+                {% csrf_token %}
+                    <div class="form-group">
+                        <label class="text" for="id_email">New email</label>
+                        <input type="email" class="form-control inputs" name="new_email" required id="id_email">
+                    </div>
+
+                    <button type="submit" class="btn text btn-outline-dark" name="editEmail" value="True">Change email</button>
+                </form>
+            </div>
+
         </div>
     </div>
 </div>

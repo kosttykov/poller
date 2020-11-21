@@ -1,0 +1,43 @@
+{% extends 'dashboard.html' %}
+{% block content %}
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Users</h1>
+</div>
+
+<div class="row align-items-center justify-content-center">
+    <div class="col-lg-10 col-md-11 col-sm-12">
+        <div class="card shadow mb-4">
+            <div class="row">
+                <div class="col-12 mb-3 mt-3">
+                    <div class="form-group col-12">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col" class="sortable">Username</th>
+                                    <th scope="col" class="sortable">Email</th>
+                                    <th scope="col" class="sortable">First name</th>
+                                    <th scope="col" class="sortable">Last name</th>
+                                    <th scope="col" class="sortable">Is active</th>
+                                    <th scope="col" class="sortable">Is staff</th>
+                                    <th scope="col" class="sortable">Is superuser</th>
+                                </tr>
+                            </thead>
+                            {% for user in users %}
+                            <tr>
+                                <th scope="col" class="sortable"><a href="/dashboard/users/{{ user.id }}/">{{ user.username }}</a></th>
+                                <th scope="col" class="sortable">{{ user.email }}</th>
+                                <th scope="col" class="sortable">{{ user.first_name }}</th>
+                                <th scope="col" class="sortable">{{ user.last_name }}</th>
+                                <th scope="col" class="sortable">{% if user.is_active %}<i class="fas fa-plus-square fa-lg text-success"></i>{% else %}<i class="fas fa-minus-square fa-lg text-danger"></i>{% endif %}</th>
+                                <th scope="col" class="sortable">{% if user.is_staff %}<i class="fas fa-plus-square fa-lg text-success"></i>{% else %}<i class="fas fa-minus-square fa-lg text-danger"></i>{% endif %}</th>
+                                <th scope="col" class="sortable">{% if user.is_superuser %}<i class="fas fa-plus-square fa-lg text-success"></i>{% else %}<i class="fas fa-minus-square fa-lg text-danger"></i>{% endif %}</th>
+                            </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

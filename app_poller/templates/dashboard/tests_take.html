@@ -1,0 +1,108 @@
+{% extends 'dashboard.html' %}
+{% block content %}
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">{{ poll.0.title }}</h1>
+    <h1 class="h2 mb-0">
+    {% if poll.0.time_to_answer == 0 %}
+    No time limit
+    {% else %}
+    <div class="tim" title="Time left">
+        <div class="tim hr">00</div>
+        <span>:</span>
+        <div class="tim mn">00</div>
+        <span>:</span>
+        <div class="tim sc">00</div>
+    </div>
+    {% endif %}
+    </h1>
+</div>
+
+<div class="row align-items-center justify-content-center">
+    <div class="col-lg-6 col-md-10 col-sm-12">
+        <div class="card shadow mb-4">
+            <div class="row">
+                <div class="col-12 mb-3 mt-3">
+                    <form method="POST">
+                        {% csrf_token %}
+                        
+                        {% for question in poll.1 %}
+                            <div class="form-group col-12">
+                                <p>{{ question.title }}</p>
+                                {% if question.image %}
+                                <img class="width-img ml-4 mb-2" src="{{ question.image.url }}">
+                                <br>
+                               {% endif %}
+                                <ul>
+                                    {% for option in question.body.option %}
+                                    <li><input
+                                        value="{{ question.id }} , {% cycle '0' '1' '2' '3' '4' '5' '6' '7' '8' '9' as val %}"
+                                        name="{{ question.id }}"
+                                        {% if question.body.is_several == 'True' %}
+                                        type="checkbox"
+                                        {% else %}
+                                        type="radio"
+                                        {% endif %}>  {{ option }}</li>
+                                    {% endfor %}
+                                    {% resetcycle %}
+                                </ul>
+                            </div>
+                        {% endfor %}
+
+                        <button type="submit" class="btn text btn-outline-dark  ml-3 mt-2" id="sendbtn">Submit</button>        
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script defer type="text/javascript"> 
+const hoursNode = document.querySelector('.hr');
+const minutesNode = document.querySelector('.mn');
+const secondsNode = document.querySelector('.sc');
+const sendBtn = document.querySelector('#sendbtn');
+
+let time = {{ poll.0.time_to_answer }};
+let nIntervId = null;
+
+const numberConverter = (value) => {
+  if (value < 10) {
+    return `0${value}`;
+    // return '0' + value;
+  }
+  return `${value}`;
+  // return '' + value;
+}
+
+const changeTimerTime = () => {
+  const hours = Math.floor(time / 60 / 60);
+  const minutes = Math.floor((time - hours * 60 * 60) / 60);
+  const seconds = time - hours * 60 * 60 - minutes * 60;
+  
+  hoursNode.innerHTML = numberConverter(hours);
+  minutesNode.innerHTML = numberConverter(minutes);
+  secondsNode.innerHTML = numberConverter(seconds);
+}
+
+changeTimerTime();
+
+document.addEventListener('DOMContentLoaded', () => {
+  console.log('nIntervId', nIntervId)
+
+  if (!nIntervId && time > 0) {
+    nIntervId = setInterval(() => {
+      console.log('asdfasdf')
+      if (time > 0) {
+        time = time - 1;
+        changeTimerTime();
+      } else {
+        clearInterval(nIntervId);
+        nIntervId = null;
+        console.log('IM done!!!!')
+        sendBtn.click()
+      }
+    }, 1000); 
+  }
+});
+
+ </script>
+{% endblock %}

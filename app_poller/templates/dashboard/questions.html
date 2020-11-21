@@ -7,7 +7,11 @@
 
 <div class="row">
 {% for question in questions %}
-<div class="card shadow col-sm-4 mb-4">
+<div class="card col-xl-3 col-lg-4 col-sm-6 mb-1 px-0" title="
+Title: {{ question.title }}
+Author: {{ question.owned.username }}
+Id: {{ question.id }}
+">
 
     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
       <h6 class="m-0 font-weight-bold text-dark">{{ question.title }}</h6>
@@ -24,18 +28,13 @@
     </div>
 
     <div class="card-body">
-        <pre></pre>
-        <ul>
-          {% for option in question.body.option %}
-          <li>{{ option }}</li>
-          {% endfor %}
-        </ul>
+      <ul>
+        {% for option in question.body.option %}
+        <li>{{ option }}</li>
+        {% endfor %}
+      </ul>
     </div>
-    <hr class="mb-0">
-    <div class="card-header bg-white m-0 d-flex flex-row align-items-center justify-content-between">
-        <h6 class="m-0 text-secondary">Owner: {{ question.owned }}</h6>
-        <h6 class="m-0 text-secondary"> Id: {{ question.id }}</h6>
-    </div>
+    <hr class="mb-0 mt-0">
 </div>
 {% endfor %}
 </div>

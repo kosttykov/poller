@@ -7,7 +7,14 @@
 
 <div class="row">
 {% for poll in polls %}
-<div class="card shadow col-sm-4 mb-4">
+<div class="card col-xl-3 col-lg-4 col-sm-6 mb-1 px-0" 
+title="
+Title: {{ poll.title }}
+Publishing time: {{ poll.publishing_time }}
+Finishing time: {{ poll.finishing_time }}
+Author: {{ poll.owned.username }}
+Id: {{ poll.id }}
+">
 
     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
       <h6 class="m-0 font-weight-bold text-dark">{{ poll.title }}</h6>
@@ -17,8 +24,8 @@
           <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
         </a>
         <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink" x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(-156px, 19px, 0px);">
-          <a class="dropdown-item" href="">Edit</a>
-          <a class="dropdown-item bg-danger text-white" href="">Delete</a>
+          <a class="dropdown-item" href="/dashboard/polls/edit/{{ poll.id }}/">Edit</a>
+          <a class="dropdown-item bg-danger text-white" href="/dashboard/polls/delete/{{ poll.id }}/">Delete</a>
         </div>
       </div>
     </div>
@@ -30,12 +37,7 @@
         {% endfor %}
       </ul>
     </div>
-    <hr class="mb-0">
-    <div class="card-header bg-white m-0 d-flex flex-row align-items-center justify-content-between">
-        <h6 class="m-0 text-secondary">Owner: </h6>
-        <h6 class="m-0 text-secondary"> Id: {{ poll.id }}</h6>
-    </div>
+</div>
 {% endfor %}
-
 </div>
 {% endblock %}
