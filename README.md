@@ -9,6 +9,17 @@
 ┗┛
 ```
 
+<h3>
+
+* Python/Django
+* PostgreSQL
+* Docker
+* Nginx
+
+</h3>
+
+<br>
+
 <h1>
 Installing Docker:
 </h1>
@@ -40,7 +51,7 @@ sudo docker-compose up -d
 
 Make migrations:
 ```
-sudo docker-compose exec web python manage.py makemigrations app_poller
+sudo docker-compose exec web python manage.py makemigrations
 ```
 ```
 sudo docker-compose exec web python manage.py migrate 
@@ -48,7 +59,7 @@ sudo docker-compose exec web python manage.py migrate
 
 Collect static:
 ```
-sudo docker-compose exec web python manage.py collectstatic --clear
+sudo docker-compose exec web python manage.py collectstatic --noinput --clear
 ```
 
 Restart containers:
