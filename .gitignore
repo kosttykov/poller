@@ -4,6 +4,3 @@
 /static/**
 /app_poller/__pycache__/**
 /poller/__pycache__/**
-/app_poller/migrations/**
-!/app_poller/migrations
-!/app_poller/migrations/__init__.py
