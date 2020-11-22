@@ -17,6 +17,7 @@ services:
     volumes:
       - .:/code
       - static_volume:/code/static
+      - media_volume:/code/media
     expose:
       - 8000
     depends_on:
@@ -25,6 +26,7 @@ services:
     build: ./nginx
     volumes:
       - static_volume:/code/static
+      - media_volume:/code/media
     ports:
       - 1337:80
     depends_on:
@@ -33,3 +35,4 @@ services:
 volumes:
   postgres_data:
   static_volume:
+  media_volume:
